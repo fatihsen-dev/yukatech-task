@@ -2,12 +2,11 @@ import Head from "next/head";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { IoMdCheckmark } from "react-icons/io";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import datas from "../dummydata/data.json";
 import { login } from "../store/auth";
 
 export default function Login() {
-   const { userData } = useSelector((state) => state.authSlice);
    const dispatch = useDispatch();
    const [username, setUsername] = useState("");
    const [password, setPassword] = useState("");
