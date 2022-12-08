@@ -13,7 +13,7 @@
          {
             "text": "Todo example text 2",
             "id": 2,
-            "status": "done"
+            "status": "complated"
          },
          {
             "text": "Todo example text 3",
@@ -26,24 +26,7 @@
       "id": 2,
       "username": "TodoUserTwo",
       "password": "TodoUserTwo",
-      "admin": true,
-      "todos": [
-         {
-            "text": "Todo example text 1",
-            "id": 1,
-            "status": "active"
-         },
-         {
-            "text": "Todo example text 2",
-            "id": 2,
-            "status": "done"
-         },
-         {
-            "text": "Todo example text 3",
-            "id": 3,
-            "status": "deleted"
-         }
-      ]
+      "admin": true
    },
    {
       "id": 3,
@@ -59,7 +42,7 @@
          {
             "text": "Todo example text 2",
             "id": 2,
-            "status": "done"
+            "status": "complated"
          },
          {
             "text": "Todo example text 3",
@@ -82,7 +65,7 @@
          {
             "text": "Todo example text 2",
             "id": 2,
-            "status": "done"
+            "status": "complated"
          },
          {
             "text": "Todo example text 3",
@@ -105,7 +88,7 @@
          {
             "text": "Todo example text 2",
             "id": 2,
-            "status": "done"
+            "status": "complated"
          },
          {
             "text": "Todo example text 3",
