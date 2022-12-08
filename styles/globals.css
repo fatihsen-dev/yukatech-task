@@ -1,2 +1,13 @@
 @import url("./tailwind.css");
 @import url("./reset.css");
+
+#__next {
+   @apply bg-dark;
+}
+
+input[type="text"]::placeholder {
+   @apply text-sm -translate-y-0.5;
+}
+input[type="password"]::placeholder {
+   @apply text-xl translate-y-0.5;
+}
