@@ -1,0 +1,117 @@
+[
+   {
+      "id": 1,
+      "username": "TodoUserOne",
+      "password": "TodoUserOne",
+      "admin": false,
+      "todos": [
+         {
+            "text": "Todo example text 1",
+            "id": 1,
+            "status": "active"
+         },
+         {
+            "text": "Todo example text 2",
+            "id": 2,
+            "status": "done"
+         },
+         {
+            "text": "Todo example text 3",
+            "id": 3,
+            "status": "deleted"
+         }
+      ]
+   },
+   {
+      "id": 2,
+      "username": "TodoUserTwo",
+      "password": "TodoUserTwo",
+      "admin": true,
+      "todos": [
+         {
+            "text": "Todo example text 1",
+            "id": 1,
+            "status": "active"
+         },
+         {
+            "text": "Todo example text 2",
+            "id": 2,
+            "status": "done"
+         },
+         {
+            "text": "Todo example text 3",
+            "id": 3,
+            "status": "deleted"
+         }
+      ]
+   },
+   {
+      "id": 3,
+      "username": "TodoUserThree",
+      "password": "TodoUserThree",
+      "admin": false,
+      "todos": [
+         {
+            "text": "Todo example text 1",
+            "id": 1,
+            "status": "active"
+         },
+         {
+            "text": "Todo example text 2",
+            "id": 2,
+            "status": "done"
+         },
+         {
+            "text": "Todo example text 3",
+            "id": 3,
+            "status": "deleted"
+         }
+      ]
+   },
+   {
+      "id": 4,
+      "username": "TodoUserFour",
+      "password": "TodoUserFour",
+      "admin": false,
+      "todos": [
+         {
+            "text": "Todo example text 1",
+            "id": 1,
+            "status": "active"
+         },
+         {
+            "text": "Todo example text 2",
+            "id": 2,
+            "status": "done"
+         },
+         {
+            "text": "Todo example text 3",
+            "id": 3,
+            "status": "deleted"
+         }
+      ]
+   },
+   {
+      "id": 5,
+      "username": "TodoUserFive",
+      "password": "TodoUserFive",
+      "admin": false,
+      "todos": [
+         {
+            "text": "Todo example text 1",
+            "id": 1,
+            "status": "active"
+         },
+         {
+            "text": "Todo example text 2",
+            "id": 2,
+            "status": "done"
+         },
+         {
+            "text": "Todo example text 3",
+            "id": 3,
+            "status": "deleted"
+         }
+      ]
+   }
+]
