@@ -30,9 +30,9 @@ export default function Home() {
 
    if (userStatus === null) {
       return (
-         <>
+         <div className="h-full bg-dark">
             <Toaster position='top-left' reverseOrder={false} />
-         </>
+         </div>
       );
    }
    if (userStatus === false) {
