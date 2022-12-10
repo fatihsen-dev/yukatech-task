@@ -4,36 +4,39 @@ import Avatar from "../components/Avatar";
 import { IoIosLogOut, IoMdCheckmark, IoMdTrash } from "react-icons/io";
 import { RiPencilFill } from "react-icons/ri";
 import { logout } from "../store/auth";
-import { useRef, useState } from "react";
-import { updateTodoStatus, addTodo } from "../store/datas";
+import { useEffect, useRef, useState } from "react";
+import { addNewTodo, todoTransfer, updateTodo } from "../store/datas";
 import { toast } from "react-hot-toast";
 import Link from "next/link";
 
 export default function Todo() {
    const { userData } = useSelector((state) => state.authSlice);
    const { datas } = useSelector((state) => state.dataSlice);
+   const [todos, setTodos] = useState(false);
    const [tab, setTab] = useState("active");
    const textInput = useRef();
    const dispatch = useDispatch();
 
+   useEffect(() => {
+      if (datas) {
+         setTodos(datas.find((dt) => dt.id === userData.id).todos);
+      }
+   }, [datas]);
+
    const addTodoHandle = (e) => {
       e.preventDefault();
       if (textInput.current.value.length === 0) {
-         toast.error("Lütfen ilgili alanları doldurun.");
+         return toast.error("Lütfen ilgili alanları doldurun.");
       }
-      dispatch(addTodo({ value: textInput.current.value, user: userData }));
+      dispatch(addNewTodo({ text: textInput.current.value, userid: userData.id }));
       textInput.current.value = "";
    };
 
-   const deleteTodoHandle = (index, data) => {
-      dispatch(updateTodoStatus({ userid: data.id, status: "deleted", postid: index }));
+   const complateTodoHandle = (todoid, userid) => {
+      dispatch(updateTodo({ todoid, userid, status: "complated" }));
    };
-   const complateTodoHandle = (index, data) => {
-      dispatch(updateTodoStatus({ userid: data.id, status: "complated", postid: index }));
-   };
-
-   const updateTodoHandle = (data) => {
-      console.log(data);
+   const deleteTodoHandle = (todoid, userid) => {
+      dispatch(updateTodo({ todoid, userid, status: "deleted" }));
    };
 
    return (
@@ -88,43 +91,51 @@ export default function Todo() {
                         </button>
                      </form>
                   </div>
-                  {datas && (
+                  {todos && (
                      <ul
                         style={tab == false ? { borderRadius: "0 4px 4px 4px" } : null}
                         className='flex-1 bg-dark flex flex-col gap-1.5 rounded p-3 border border-gray2'>
-                        {datas.map((data, index) => {
-                           if (data.status == tab) {
+                        {todos.map((todo, index) => {
+                           if (todo.status == tab) {
                               return (
                                  <li
                                     key={index}
                                     className='flex bg-light p-1 rounded items-center justify-between'>
                                     <span className='text-lg font-medium text-darkText'>
-                                       {data.text}
+                                       {todo.text}
                                     </span>
-                                    {data.status == "active" && (
+                                    {todo.status == "active" && (
                                        <div className='flex items-center gap-2'>
                                           <button
                                              onClick={() =>
-                                                complateTodoHandle(data.id, userData)
+                                                complateTodoHandle(todo.id, userData.id)
                                              }
                                              className='bg-green hover:bg-green/80 transition-colors w-7 text-light rounded-sm h-7 grid place-items-center'>
                                              <IoMdCheckmark />
                                           </button>
                                           <Link
-                                             href={`/edit/${data.id}`}
+                                             href={`/edit/${todo.id}`}
+                                             onClick={() =>
+                                                dispatch(
+                                                   todoTransfer({
+                                                      todo: todo,
+                                                      userid: userData.id,
+                                                   })
+                                                )
+                                             }
                                              className='bg-blue hover:bg-blue/80 transition-colors w-7 text-light rounded-sm h-7 grid place-items-center'>
                                              <RiPencilFill />
                                           </Link>
                                           <button
                                              onClick={() =>
-                                                deleteTodoHandle(data.id, userData)
+                                                deleteTodoHandle(todo.id, userData.id)
                                              }
                                              className='bg-red hover:bg-red/80 transition-colors w-7 text-light rounded-sm h-7 grid place-items-center'>
                                              <IoMdTrash />
                                           </button>
                                        </div>
                                     )}
-                                    {data.status == "complated" && (
+                                    {todo.status == "complated" && (
                                        <span className='text-green pr-2'>Complated</span>
                                     )}
                                  </li>
