@@ -47,7 +47,7 @@ export default function Todo() {
             <link rel='icon' href='/favicon.ico' />
          </Head>
          <div className='container h-full m-auto flex'>
-            <div className='w-7/12 h-4/6 max-h-[1000px] gap-6 rounded m-auto p-6 bg-gray border border-gray2 flex flex-col'>
+            <div className='2xl:w-7/12 xl:w-4/5 lg:w-full md:w-full sm:w-full w-full 2xl:h-4/6 md:h-4/6 sm:h-4/6  h-full 2xl:rounded sm:rounded rounded-none max-h-[1000px] gap-6 m-auto p-6 bg-gray border border-gray2 flex flex-col'>
                <div className='flex text-light gap-2.5 items-center'>
                   <Avatar className='' size={34} name={userData.username} />
                   <span className='text-lg'>{userData.username}</span>
@@ -56,37 +56,39 @@ export default function Todo() {
                   </button>
                </div>
                <div className='flex-1 flex flex-col'>
-                  <div className='flex items-center justify-between'>
-                     <button
-                        onClick={() => setTab("active")}
-                        style={
-                           tab == "active"
-                              ? { backgroundColor: "#222831", borderColor: "#454C56" }
-                              : null
-                        }
-                        className='transition-colors text-xl px-8 border-x border-t border-transparent bg-transparent rounded-t py-1.5 text-white'>
-                        Todo
-                     </button>
-                     <button
-                        onClick={() => setTab("complated")}
-                        style={
-                           tab == "complated"
-                              ? { backgroundColor: "#222831", borderColor: "#454C56" }
-                              : null
-                        }
-                        className='transition-colors text-xl px-8 border-x border-t bg-transparent border-transparent rounded-t py-1.5 text-white'>
-                        Completed
-                     </button>
+                  <div className='flex items-center gap-1 justify-between 2xl:flex-row md:flex-row flex-col-reverse'>
+                     <div className='2xl:inline-block lg:inline-block flex w-full'>
+                        <button
+                           onClick={() => setTab("active")}
+                           style={
+                              tab == "active"
+                                 ? { backgroundColor: "#222831", borderColor: "#454C56" }
+                                 : null
+                           }
+                           className='transition-colors text-xl px-8 border-x border-t border-transparent bg-transparent rounded-t py-1.5 text-white 2xl:flex-auto lg:flex-auto flex-1'>
+                           Todo
+                        </button>
+                        <button
+                           onClick={() => setTab("complated")}
+                           style={
+                              tab == "complated"
+                                 ? { backgroundColor: "#222831", borderColor: "#454C56" }
+                                 : null
+                           }
+                           className='transition-colors text-xl px-8 border-x border-t bg-transparent border-transparent rounded-t py-1.5 text-white 2xl:flex-auto lg:flex-auto flex-1'>
+                           Completed
+                        </button>
+                     </div>
                      <form
-                        className='flex ml-auto items-center h-full flex-1 pb-1 gap-1.5'
+                        className='flex ml-auto items-center w-full flex-1 pb-1 gap-1.5'
                         onSubmit={addTodoHandle}>
                         <input
                            ref={textInput}
-                           className='w-7/12 ml-auto text-lg rounded px-1.5 h-full'
+                           className='w-7/12  h-10 ml-auto text-lg rounded px-1.5 flex-1'
                            type='text'
                            placeholder='Add Todo...'
                         />
-                        <button className='bg-green hover:bg-green/90 transition-colors text-light rounded px-4 font-medium h-full'>
+                        <button className='bg-green h-10 hover:bg-green/90 transition-colors text-light rounded px-4 font-medium'>
                            Add Todo
                         </button>
                      </form>
@@ -100,17 +102,17 @@ export default function Todo() {
                               return (
                                  <li
                                     key={index}
-                                    className='flex bg-light p-1 rounded items-center justify-between'>
-                                    <span className='text-lg font-medium text-darkText'>
+                                    className='flex bg-light 2xl:flex-row sm:flex-row gap-5 flex-col p-1 rounded items-center justify-between'>
+                                    <span className='text-lg font-medium text-darkText mr-auto'>
                                        {todo.text}
                                     </span>
                                     {todo.status == "active" && (
-                                       <div className='flex items-center gap-2'>
+                                       <div className='flex items-center gap-2 ml-auto'>
                                           <button
                                              onClick={() =>
                                                 complateTodoHandle(todo.id, userData.id)
                                              }
-                                             className='bg-green hover:bg-green/80 transition-colors w-7 text-light rounded-sm h-7 grid place-items-center'>
+                                             className='bg-green hover:bg-green/80 transition-colors text-light rounded-sm h-7 w-7 flex justify-center items-center'>
                                              <IoMdCheckmark />
                                           </button>
                                           <Link
@@ -136,7 +138,9 @@ export default function Todo() {
                                        </div>
                                     )}
                                     {todo.status == "complated" && (
-                                       <span className='text-green pr-2'>Complated</span>
+                                       <span className='text-green pr-2 ml-auto'>
+                                          Complated
+                                       </span>
                                     )}
                                  </li>
                               );

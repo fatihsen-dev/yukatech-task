@@ -35,13 +35,13 @@ export default function Login() {
             <link rel='icon' href='/favicon.ico' />
          </Head>
          <form
-            className='flex flex-col gap-2 px-20 py-16 justify-center items-center bg-gray border border-gray2 rounded'
+            className='flex flex-col gap-2 2xl:px-20 2xl:py-16 sm:px-20 sm:py-16 px-5 justify-center items-center bg-gray 2xl:w-auto sm:w-auto w-full 2xl:h-auto sm:h-auto h-full border border-gray2 rounded'
             onSubmit={loginHandle}>
             <h2 className='text-white text-4xl font-medium mb-4'>Welcome back</h2>
-            <div className='flex flex-col mb-1.5'>
+            <div className='flex flex-col mb-1.5 w-full'>
                <span className='text-sm text-light'>User Name</span>
                <input
-                  className='rounded-[5px] focus:border-green text-lg px-2 py-1.5 loginUserName w-80 border border-gray3'
+                  className='rounded-[5px] focus:border-green text-lg px-2 py-1.5 loginUserName 2xl:w-80 sm:w-80 w-full border border-gray3'
                   placeholder='USERNAME'
                   type='text'
                   name='username'
@@ -49,10 +49,10 @@ export default function Login() {
                   onChange={(e) => setUsername(e.target.value)}
                />
             </div>
-            <div className='flex flex-col'>
+            <div className='flex flex-col w-full'>
                <span className='text-sm text-light'>Password</span>
                <input
-                  className='rounded-[5px] focus:border-green text-lg px-2 py-1.5 loginPassword w-80 border border-gray3'
+                  className='rounded-[5px] focus:border-green text-lg px-2 py-1.5 loginPassword 2xl:w-80 sm:w-80 w-full border border-gray3'
                   placeholder='*********'
                   type='password'
                   name='password'
