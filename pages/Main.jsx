@@ -9,24 +9,12 @@ import { useEffect } from "react";
 export default function Main() {
    const { userData } = useSelector((state) => state.authSlice);
    const dispatch = useDispatch();
-
    useEffect(() => {
-      if (userData.admin === true) {
-         if (localStorage.getItem("datas")) {
-            dispatch(loadData(JSON.parse(localStorage.getItem("datas"))));
-         } else {
-            dispatch(loadData(data));
-            localStorage.setItem("datas", JSON.stringify(data));
-         }
+      if (localStorage.getItem("datas")) {
+         dispatch(loadData(JSON.parse(localStorage.getItem("datas"))));
       } else {
-         if (localStorage.getItem("datas")) {
-            const getLocal = JSON.parse(localStorage.getItem("datas"));
-            const filtered = getLocal.find((user) => user.id === userData.id);
-            dispatch(loadData(filtered.todos));
-         } else {
-            dispatch(loadData(userData.todos));
-            localStorage.setItem("datas", JSON.stringify(data));
-         }
+         dispatch(loadData(data));
+         localStorage.setItem("datas", JSON.stringify(data));
       }
    }, []);
 
