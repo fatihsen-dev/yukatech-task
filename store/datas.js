@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 let initialState = {
    datas: false,
+   todo: false,
 };
 
 export const dataSlice = createSlice({
@@ -11,55 +12,53 @@ export const dataSlice = createSlice({
       loadData: (state, action) => {
          state.datas = action.payload;
       },
-      updateTodoStatus: (state, action) => {
-         let leftUsers = JSON.parse(localStorage.getItem("datas")).filter(
-            (db) => db.id !== action.payload.userid
-         );
-         let user = JSON.parse(localStorage.getItem("datas")).find(
-            (db) => db.id === action.payload.userid
-         );
-         let todo = { ...user.todos.find((td) => td.id === action.payload.postid) };
-         todo.status = action.payload.status;
-         let leftTodos = user.todos.filter((td) => td.id !== action.payload.postid);
-
-         console.log(leftUsers);
-         localStorage.setItem(
-            "datas",
-            JSON.stringify([...leftUsers, { ...user, todos: [...leftTodos, todo] }])
-         );
-         state.datas = JSON.parse(localStorage.getItem("datas")).find(
-            (db) => db.id === action.payload.userid
-         ).todos;
+      todoTransfer: (state, action) => {
+         state.todo = action.payload;
       },
-
-      addTodo: (state, action) => {
+      addNewTodo: (state, action) => {
+         const { text, userid } = action.payload;
+         const localData = JSON.parse(localStorage.getItem("datas"));
+         const leftData = localData.filter((dt) => dt.id !== userid);
+         const user = localData.find((user) => user.id === userid);
          state.datas = [
-            ...state.datas,
+            ...leftData,
             {
-               text: action.payload.value,
-               id: state.datas.length + 1,
-               status: "active",
+               ...user,
+               todos: [
+                  ...user.todos,
+                  { id: user.todos.length + 1, text, status: "active" },
+               ],
             },
          ];
-
-         let localData = [
-            ...JSON.parse(localStorage.getItem("datas")).filter(
-               (dt) => dt.id !== action.payload.user.id
-            ),
+         localStorage.setItem("datas", JSON.stringify(state.datas));
+      },
+      updateTodo: (state, action) => {
+         let { todoid, userid, status, text } = action.payload;
+         const localData = [...JSON.parse(localStorage.getItem("datas"))];
+         let leftData = [...localData.filter((dt) => dt.id !== userid)];
+         let user = { ...localData.find((user) => user.id === userid) };
+         let leftTodos = [...user.todos.filter((td) => td.id !== todoid)];
+         let todo = { ...user.todos.find((td) => td.id === todoid) };
+         if (status) {
+            todo.status = status;
+         }
+         if (text) {
+            todo.text = text;
+         }
+         state.datas = [
+            ...leftData,
+            {
+               ...user,
+               todos: [...leftTodos, todo],
+            },
          ];
-         localStorage.setItem(
-            "datas",
-            JSON.stringify([
-               ...localData,
-               {
-                  ...action.payload.user,
-                  todos: [...state.datas],
-               },
-            ])
-         );
+         state.datas.sort(function (a, b) {
+            return a.id - b.id || a.username.localeCompare(b.username);
+         });
+         localStorage.setItem("datas", JSON.stringify(state.datas));
       },
    },
 });
 
-export const { loadData, updateTodoStatus, addTodo } = dataSlice.actions;
+export const { loadData, todoTransfer, addNewTodo, updateTodo } = dataSlice.actions;
 export default dataSlice.reducer;

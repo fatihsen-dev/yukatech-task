@@ -1,6 +1,7 @@
 @import url("./tailwind.css");
 @import url("./reset.css");
 
+body,
 #__next {
    @apply bg-dark;
 }
