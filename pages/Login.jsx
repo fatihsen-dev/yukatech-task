@@ -3,7 +3,7 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 import { IoMdCheckmark } from "react-icons/io";
 import { useDispatch } from "react-redux";
-import datas from "../dummydata/data.json";
+import jsonData from "../dummydata/data.json";
 import { login } from "../store/auth";
 
 export default function Login() {
@@ -13,12 +13,12 @@ export default function Login() {
 
    const loginHandle = (e) => {
       e.preventDefault();
-      const filtered = datas.find((data) => data.username === username);
-      if (filtered) {
-         if (filtered.password === password) {
-            dispatch(login(filtered));
+      const user = jsonData.find((data) => data.username === username);
+      if (user) {
+         if (user.password === password) {
+            dispatch(login(user));
             if (e.target.remember.checked == true) {
-               localStorage.setItem("user", JSON.stringify(filtered));
+               localStorage.setItem("user", JSON.stringify(user));
             }
             return toast.success("Giriş başarılı");
          }
