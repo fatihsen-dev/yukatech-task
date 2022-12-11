@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { useRef } from "react";
-import { toast } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
 import { updateTodo } from "../../../store/datas";
 import { IoMdClose } from "react-icons/io";
@@ -24,7 +24,7 @@ export default function Edit({ params }) {
             text: textInput.current.value,
          })
       );
-
+      toast.success("Görev güncellendi");
       textInput.current.value = "";
       router.push("/");
    };
@@ -61,6 +61,7 @@ export default function Edit({ params }) {
                </button>
             </div>
          </div>
+         <Toaster position='top-left' reverseOrder={false} />
       </div>
    );
 }

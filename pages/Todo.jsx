@@ -34,9 +34,11 @@ export default function Todo() {
 
    const complateTodoHandle = (todoid, userid) => {
       dispatch(updateTodo({ todoid, userid, status: "complated" }));
+      toast.success("Görev tamamlandı");
    };
    const deleteTodoHandle = (todoid, userid) => {
       dispatch(updateTodo({ todoid, userid, status: "deleted" }));
+      toast.success("Görev silindi");
    };
 
    return (
@@ -57,7 +59,7 @@ export default function Todo() {
                </div>
                <div className='flex-1 flex flex-col'>
                   <div className='flex items-center gap-1 justify-between 2xl:flex-row md:flex-row flex-col-reverse'>
-                     <div className='2xl:inline-block lg:inline-block flex w-full'>
+                     <div className='2xl:inline-block lg:inline-block flex 2xl:w-auto md:w-auto w-full'>
                         <button
                            onClick={() => setTab("active")}
                            style={
@@ -80,15 +82,15 @@ export default function Todo() {
                         </button>
                      </div>
                      <form
-                        className='flex ml-auto items-center w-full flex-1 pb-1 gap-1.5'
+                        className='flex ml-auto items-center h-full w-full flex-1 pb-1 gap-1.5'
                         onSubmit={addTodoHandle}>
                         <input
                            ref={textInput}
-                           className='w-7/12  h-10 ml-auto text-lg rounded px-1.5 flex-1'
+                           className='w-7/12 2xl:h-full md:h-full h-10 ml-auto text-lg rounded px-1.5 flex-1'
                            type='text'
                            placeholder='Add Todo...'
                         />
-                        <button className='bg-green h-10 hover:bg-green/90 transition-colors text-light rounded px-4 font-medium'>
+                        <button className='bg-green 2xl:h-full md:h-full h-10 hover:bg-green/90 transition-colors text-light rounded px-4 font-medium'>
                            Add Todo
                         </button>
                      </form>

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import data from "../dummydata/data.json";
 import Admin from "./Admin";
 import Todo from "./Todo";
-import { loadData } from "../store/datas";
+import datas, { loadData } from "../store/datas";
 import { useEffect } from "react";
 
 export default function Main() {
@@ -18,7 +18,7 @@ export default function Main() {
       }
    }, []);
 
-   if (userData.admin === true) {
+   if (userData.admin === true && datas) {
       return <Admin />;
    } else {
       return <Todo />;
